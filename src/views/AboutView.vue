@@ -152,7 +152,7 @@ export default {
     const router = useRouter()
     const query = ref({})
     onMounted( () => {
-      localStorage.removeItem('products');
+      // localStorage.removeItem('products');
       let promise = new Promise( async (resolve, reject) => {
         await router.isReady();
         query.value = route.query;
