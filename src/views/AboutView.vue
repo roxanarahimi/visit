@@ -89,17 +89,24 @@ export default {
             data.value.forEach((item)=>{
               item.shelf = 1;
               item.FT = 0;
+            });
+          })
+          .then(()=>{
+
+            let x = data.value.filter((item)=>{
+              return item.type == query.value.type && item.brand == query.value.brand && (item.grade == query.value.grade || item.grade == 'Z')})
+            data.value = x;
+
+            data.value.forEach((item)=>{
 
               let storage = JSON.parse(localStorage.getItem('products'));
               storage.forEach((element)=>{
-                console.log('element',element)
-                if(query.value && element.brand == query.value.brand &&
+                if(element.brand == query.value.brand &&
                     element.type == query.value.type &&
                     element.shop_id == query.value.shop_id &&
                     element.user_id == query.value.user_id){
                   element.info.forEach((d)=>{
                     console.log('d',d, item)
-
                     if (d.product_id == item.id){
                       item.shelf = d.shelf;
                       item.FT = d.FT;
@@ -107,17 +114,7 @@ export default {
                   })
                 }
               });
-            });
-
-
-
-
-          })
-          .then(()=>{
-
-            let x = data.value.filter((item)=>{
-              return item.type == query.value.type && item.brand == query.value.brand && (item.grade == query.value.grade)})
-            data.value = x;
+            })
           })
           .catch((error)=>{ console.log(error)});
     }
