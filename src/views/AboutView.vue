@@ -116,7 +116,7 @@ export default {
           .then(()=>{
 
             let x = data.value.filter((item)=>{
-              return item.type == query.value.type && item.brand == query.value.brand && (item.grade == query.value.grade || item.grade == 'Z')})
+              return item.type == query.value.type && item.brand == query.value.brand && (item.grade == query.value.grade)})
             data.value = x;
           })
           .catch((error)=>{ console.log(error)});
