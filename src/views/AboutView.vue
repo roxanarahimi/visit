@@ -109,7 +109,7 @@ export default {
             data.value.forEach((p)=>{
               ids.push(p.id)
             })
-            axios.post('http://api.amadehlaziz.com:8877/form/products_by_ids?form_id='+localStorage.getItem('form_id')+'&api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',
+            axios.post('https://api.amadehlaziz.com:446/form/products_by_ids?form_id='+localStorage.getItem('form_id')+'&api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',
                 { ids })
                 .then((response)=>{
                   console.log('dataaaaa',response.data)
