@@ -103,8 +103,8 @@ export default {
             let x = data.value.filter((item)=>{
               return item.type == query.value.type && item.brand == query.value.brand && (item.grade == query.value.grade || item.grade == 'Z')})
             data.value = x;
-          })
-          .then(()=>{
+
+
             let ids = []
             data.value.forEach((p)=>{
               ids.push(p.id)
@@ -122,7 +122,7 @@ export default {
                     })
                   })
                 })
-            .catch((error)=>{console.log(error)})
+                .catch((error)=>{console.log(error)})
           })
           .catch((error)=>{ console.log(error)});
     }
@@ -181,9 +181,9 @@ export default {
       })
       .then((response)=>{
         console.log('response',response.data)
+        getProducts();
 
       }).catch((error)=>{ console.error(error)})
-
 
       document.querySelector('#back_btn').click();
     }
