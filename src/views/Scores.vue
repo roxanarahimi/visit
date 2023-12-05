@@ -185,8 +185,8 @@ export default {
           }
         })
          y = {
-          "visitor_id": 0,
-          "shop_id": 0,
+          "visitor_id": query.value.user_id,
+          "shop_id": query.value.shop_id,
           "visit_date": query.value.date,
           "visit_time": query.value.time,
           "product_info": ps,
@@ -217,10 +217,12 @@ export default {
           }
         }
       }).then(()=>{
-        console.log('yy',y)
             axios.post('https://api.amadehlaziz.com:446/form/create_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', y)
                 .then((response)=>{
-                  console.log(response.data)
+                  console.log(response.data);
+                  alert('ثبت نهایی فرم با موفقیت انجام شد')
+                  router.go(-3);
+
                 })
                 .catch((error)=>{ console.log(error)});
           })
