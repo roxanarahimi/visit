@@ -100,29 +100,23 @@ export default {
             });
           })
           .then(()=>{
-
             let x = data.value.filter((item)=>{
               return item.type == query.value.type && item.brand == query.value.brand && (item.grade == query.value.grade || item.grade == 'Z')})
             data.value = x;
-
-            data.value.forEach((item)=>{
-
-              let storage = JSON.parse(localStorage.getItem('products'));
-              storage.forEach((element)=>{
-                if(element.brand == query.value.brand &&
-                    element.type == query.value.type &&
-                    element.shop_id == query.value.shop_id &&
-                    element.user_id == query.value.user_id){
-                  element.info.forEach((d)=>{
-                    console.log('d',d, item)
-                    if (d.product_id == item.id){
-                      item.shelf = d.shelf;
-                      item.FT = d.FT;
-                    }
-                  })
-                }
-              });
+          })
+          .then(()=>{
+            let ids = []
+            data.value.forEach((p)=>{
+              ids.push(p.id)
             })
+            console.log('ids',ids)
+            axios.post('http://api.amadehlaziz.com:8877/form/products_by_ids?form_id='+localStorage.getItem('form_id')+'&api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',{
+              ids
+            })
+                .then((response)=>{
+                  console.log(response.data)
+                })
+            .catch((error)=>{console.log(error)})
           })
           .catch((error)=>{ console.log(error)});
     }
@@ -174,38 +168,18 @@ export default {
       data.value.forEach((item)=>{
         info.push({ product_id: item.id, shelf: item.shelf, FT: item.FT })
       })
-      let products = {
-        brand: query.value.brand,
-        type: query.value.type,
-        shop_id: query.value.shop_id,
-        user_id: query.value.user_id,
-        info: info
-      }
-      let old =  JSON.parse(localStorage.getItem('products'))
-      if(old){
-        old.forEach((item)=>{
-          if(
-              item.brand == products.brand &&
-              item.type == products.type &&
-              item.shop_id == products.shop_id &&
-              item.user_id == products.user_id
-          ){
-            item.info = info;
-          }else{
-            old.push( products )
-          }
-        })
-      }else{
-         old = [];
-        old.push( products)
-      }
 
-      localStorage.setItem('products', JSON.stringify(old));
-      console.log(localStorage.getItem('products'));
+      axios.post('https://api.amadehlaziz.com:446/form/add_products_to_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',{
+        "form_id": localStorage.getItem('form_id'),
+        "product_info": info
+      })
+      .then((response)=>{
+        console.log('response',response.data)
+
+      }).catch((error)=>{ console.error(error)})
 
 
       document.querySelector('#back_btn').click();
-
     }
     return{
       data, increaseFT, decreaseFT, increaseShelf, decreaseShelf, route, router, query,getProducts,submit

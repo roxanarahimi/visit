@@ -50,9 +50,7 @@ export default {
     const router = useRouter()
     const query = ref({})
     onMounted(async () => {
-      console.log('Before Router Preparation', route.name);
       await router.isReady();
-      console.log('After Router Preparation', route.name);
       query.value = route.query;
     });
     const data = [

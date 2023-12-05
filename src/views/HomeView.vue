@@ -59,7 +59,7 @@
         </select>
       </div>
       <div class="d-flex justify-content-center pt-5">
-        <router-link v-if="all" :to="{ name: 'types', query : info}"   class="btn-btn mx-auto px-5 py-2">ثبت</router-link>
+        <router-link v-if="all" :to="{ name: 'types', query : info}" @click="createForm"  class="btn-btn mx-auto px-5 py-2">ثبت</router-link>
         <button  v-if="!all" class="btn-btn mx-auto px-5" @click.prevent =submit>ثبت</button>
       </div>
     </form>
@@ -77,7 +77,6 @@ import DatePicker from 'vue3-persian-datetime-picker'
 export default {
   name: "HomeView",
   components: {
-
     Multiselect, DatePicker
   },
   setup(){
@@ -205,9 +204,20 @@ export default {
       color: 'black',
       autoSubmit: false
     }
-
-
-    return {date, options, api_key, city,info, time, cities, groups, grades,
+    const createForm = ()=>{
+      axios.post('https://api.amadehlaziz.com:446/form/create_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',{
+        shop_id: shop.value.id,
+        visitor_id: user.value.id,
+        visit_date: date.value,
+        visit_time: time.value
+      })
+          .then((response)=>{
+            console.log(response.data)
+            localStorage.setItem('form_id', response.data.form_id)
+          })
+          .catch((error)=>{ console.log(error)});
+    }
+    return {date, options, api_key, city,info, time, cities, groups, grades,createForm,
       users, shops, getUsers, getShops, submit, check, all, grade, group, shop, user
     }
   }
