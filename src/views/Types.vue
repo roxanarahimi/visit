@@ -62,6 +62,7 @@ export default {
       {title: 'ادویه'},
       {title: 'پاستا'},
       {title: 'پیاز داغ'},
+      {title: 'ژله'},
       {title: 'پودینگ'},
       {title: 'غلات صبحانه'},
       {title: 'شکلات صبحانه'},

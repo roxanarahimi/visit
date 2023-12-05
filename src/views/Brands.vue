@@ -74,6 +74,7 @@ export default {
       {type: 'پاستا', brands: ['الیت',]},
       {type: 'پیاز داغ', brands: ['الیت',]},
       {type: 'پرک', brands: ['الیت',]},
+      {type: 'ژله', brands: ['کوپا',]},
       {type: 'پودینگ', brands: ['کوپا', 'فیت و فان',]},
       {type: 'غلات صبحانه', brands: ['کوپا',]},
       {type: 'شکلات صبحانه', brands: ['کوپا',]},
