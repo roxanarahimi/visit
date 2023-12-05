@@ -83,6 +83,8 @@ export default {
     const router = useRouter()
     const query = ref({})
     onMounted(async () => {
+      console.log('pssss',JSON.parse(localStorage.getItem('products')))
+
       await router.isReady();
       query.value = route.query;
 
@@ -156,12 +158,27 @@ export default {
       })
       promise.then((points) => {
         console.log('points',points.biscuit_ocopa_30_3)
+        console.log('pssss',JSON.parse(localStorage.getItem('products')))
+        let ps = [];
+        let xo= JSON.parse(localStorage.getItem('products'))
+        xo.forEach((element)=>{
+          if(
+              element.shop_id == query.value.shop_id &&
+              element.visitor_id == query.value.visitor_id &&
+              element.grade == query.value.grade
+          ){
+            element.info.forEach((p)=>{
+              ps.push(p);
+            })
+
+          }
+        })
          y = {
           "visitor_id": 0,
           "shop_id": 0,
           "visit_date": query.value.date,
           "visit_time": query.value.time,
-          "product_info": JSON.parse(localStorage.getItem('products')),
+          "product_info": ps,
           "points": {
             "total_absence": total_absence.value,
             "total_points": total_points.value,
