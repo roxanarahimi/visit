@@ -83,12 +83,8 @@ export default {
     const router = useRouter()
     const query = ref({})
     onMounted(async () => {
-      console.log('pssss',JSON.parse(localStorage.getItem('products')))
-
       await router.isReady();
       query.value = route.query;
-
-
     })
     const total_absence = ref(0)
     const total_points = ref(0)
@@ -124,7 +120,23 @@ export default {
       data.value.forEach((item)=>{
         info[item.name] = item.checked
       })
-      info.products = JSON.parse(localStorage.getItem('products'))
+      let ps = [];
+      let xo= JSON.parse(localStorage.getItem('products'))
+      xo.forEach((element)=>{
+        console.log(element,'lll')
+        if(
+            element.shop_id == query.value.shop_id &&
+            element.user_id == query.value.user_id &&
+            element.type == query.value.type
+        ){
+          element.info.forEach((p)=>{
+            ps.push(p);
+          })
+
+        }
+      })
+      info.products = ps;
+      console.log(xo, ps)
 
       axios.post('https://api.amadehlaziz.com:446/form/calculate_point?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', info)
           .then((response)=>{
@@ -157,15 +169,14 @@ export default {
         if (points) {resolve(points);} else {   reject('Error');}
       })
       promise.then((points) => {
-        console.log('points',points.biscuit_ocopa_30_3)
         console.log('pssss',JSON.parse(localStorage.getItem('products')))
         let ps = [];
         let xo= JSON.parse(localStorage.getItem('products'))
         xo.forEach((element)=>{
           if(
               element.shop_id == query.value.shop_id &&
-              element.visitor_id == query.value.visitor_id &&
-              element.grade == query.value.grade
+              element.user_id == query.value.user_id &&
+              element.type == query.value.type
           ){
             element.info.forEach((p)=>{
               ps.push(p);

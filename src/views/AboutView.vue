@@ -202,6 +202,8 @@ export default {
 
       localStorage.setItem('products', JSON.stringify(old));
       console.log(localStorage.getItem('products'));
+
+
     }
     return{
       data, increaseFT, decreaseFT, increaseShelf, decreaseShelf, route, router, query,getProducts,submit
