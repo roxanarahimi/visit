@@ -109,12 +109,18 @@ export default {
             data.value.forEach((p)=>{
               ids.push(p.id)
             })
-            console.log('ids',ids)
-            axios.post('http://api.amadehlaziz.com:8877/form/products_by_ids?form_id='+localStorage.getItem('form_id')+'&api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',{
-              ids
-            })
+            axios.post('http://api.amadehlaziz.com:8877/form/products_by_ids?form_id='+localStorage.getItem('form_id')+'&api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',
+                { ids })
                 .then((response)=>{
-                  console.log(response.data)
+                  console.log('dataaaaa',response.data)
+                  data.value.forEach((d)=>{
+                    response.data.forEach((r)=>{
+                      if(d.id == r.product_id){
+                        d.shelf = r.shelf;
+                        d.FT = r.FT;
+                      }
+                    })
+                  })
                 })
             .catch((error)=>{console.log(error)})
           })
