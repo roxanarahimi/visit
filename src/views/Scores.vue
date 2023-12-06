@@ -177,11 +177,8 @@ export default {
           "chewing_gum_50": points.chewing_gum_50_2
         }
       }
-      console.log('y',y)
-
       axios.post('https://api.amadehlaziz.com:446/form/add_points_to_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', y)
           .then((response) => {
-            console.log(response.data);
             alert('ثبت نهایی فرم با موفقیت انجام شد')
             router.go(-3);
 

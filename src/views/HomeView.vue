@@ -212,7 +212,6 @@ export default {
         visit_time: time.value
       })
           .then((response)=>{
-            console.log(response.data)
             localStorage.setItem('form_id', response.data.form_id)
           })
           .catch((error)=>{ console.log(error)});

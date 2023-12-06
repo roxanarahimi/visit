@@ -112,7 +112,6 @@ export default {
             axios.post('https://api.amadehlaziz.com:446/form/products_by_ids?form_id='+localStorage.getItem('form_id')+'&api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',
                 { ids })
                 .then((response)=>{
-                  console.log('dataaaaa',response.data)
                   data.value.forEach((d)=>{
                     response.data.forEach((r)=>{
                       if(d.id == r.product_id){
@@ -180,7 +179,6 @@ export default {
         "product_info": info
       })
       .then((response)=>{
-        console.log('response',response.data)
         getProducts();
 
       }).catch((error)=>{ console.error(error)})
