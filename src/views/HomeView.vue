@@ -41,8 +41,8 @@
 <!--          <option value="" selected>نام فروشگاه:</option>-->
 <!--          <option  v-for="item in shops" :value="item.name">{{ item.name}}</option>-->
 <!--        </select>-->
-        <Multiselect  @change = "check"
-            v-model="shop"
+        <Multiselect
+            v-model="shop" @change="check2"
                       placeholder="فروشگاه:"
                       dir="rtl"
             :mode="'single'"
@@ -217,8 +217,13 @@ export default {
           })
           .catch((error)=>{ console.log(error)});
     }
+    const check2  = ()=>{
+      if (grade.value != '' && group.value != '' && city.value != '' && shop.value?.id && user.value != '' && date.value != '' && time.value != '') {
+        all.value = true;
+      }
+    }
     return {date, options, api_key, city,info, time, cities, groups, grades,createForm,
-      users, shops, getUsers, getShops, submit, check, all, grade, group, shop, user
+      users, shops, getUsers, getShops, submit, check, all, grade, group, shop, user, check2
     }
   }
 }
