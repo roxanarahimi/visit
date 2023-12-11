@@ -55,12 +55,12 @@
 
       <div class="d-flex justify-content-between">
         <p>جمع امتیاز عدم:</p>
-        <input id="notExist" v-model="total_absence" class=" rounded text-center py-1"
+        <input id="notExist" class=" rounded text-center py-1"
                style="background-color: lightgray; width: 100px; height: 30px; border: none">
       </div>
       <div class="d-flex justify-content-between">
         <p>جمع امتیاز چیدمان:</p>
-        <input id="exist" v-model="total_points" class=" rounded text-center py-1"
+        <input id="exist" class=" rounded text-center py-1"
                style="background-color: lightgray; width: 100px; height: 30px; border: none">
       </div>
 
@@ -129,8 +129,12 @@ export default {
       info.form_id = localStorage.getItem('form_id')
       axios.post('https://api.amadehlaziz.com:446/form/calculate_point?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', info)
           .then((response) => {
-            document.querySelector('#exist').value = response.data.total_layout
-            document.querySelector('#notExist').value = response.data.total_absence
+            document.querySelector('#exist').value = response.data.total_layout;
+            document.querySelector('#notExist').value = response.data.total_absence;
+
+            total_absence.value = response.data.total_absence;
+            total_points.value = response.data.total_layout;
+
           })
           .catch((error) => {
             console.log(error)
@@ -145,8 +149,8 @@ export default {
       y = {
         form_id: localStorage.getItem('form_id'),
         points: {
-          total_absence:document.querySelector('#notExist').value,
-          total_points: document.querySelector('#exist').value,
+          total_absence: total_absence.value,
+          total_points: total_points.value,
           "form_id": localStorage.getItem('form_id'),
           "noodelite_60": points.noodelite_60_10,
           "noodle_amadeh_noodiland_20": points.noodle_amadeh_noodiland_20_5,
