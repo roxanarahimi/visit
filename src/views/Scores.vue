@@ -109,13 +109,7 @@ export default {
       {name: 'glass_box_coffee_40_7', title: 'قهوه های کیسه ای باکسی و شیشه ای', space: 40, score: 7, checked: false},
       {name: 'biscuit_ocopa_30_3', title: 'بیسکوییت اوکوپا', space: 30, score: 3, checked: false},
       {name: 'creamy_bran_biscuit_15_2', title: 'بیسکوییت های سبوس ساده و کرمدار', space: 15, score: 2, checked: false},
-      {
-        name: 'rectangular_biscuit_piece_chocolate_5_1',
-        title: 'بیسکوییت مستطیلی و تکه شکلات',
-        space: 5,
-        score: 1,
-        checked: false
-      },
+      {name: 'rectangular_biscuit_piece_chocolate_5_1', title: 'بیسکوییت مستطیلی و تکه شکلات', space: 5, score: 1, checked: false},
       {name: 'copa_fit_and_fun_pudding_95_2', title: 'پودینگ کوپا و فیت و فان', space: 95, score: 2, checked: false},
       {name: 'jelly_30_3', title: 'ژله', space: 30, score: 3, checked: false},
       {name: 'breakfast_cereal_30_3', title: 'غلات صبحانه', space: 30, score: 3, checked: false},
@@ -151,8 +145,8 @@ export default {
       y = {
         form_id: localStorage.getItem('form_id'),
         points: {
-          total_absence: total_absence.value,
-          total_points: total_points.value,
+          total_absence:document.querySelector('#notExist').value,
+          total_points: document.querySelector('#exist').value,
           "form_id": localStorage.getItem('form_id'),
           "noodelite_60": points.noodelite_60_10,
           "noodle_amadeh_noodiland_20": points.noodle_amadeh_noodiland_20_5,

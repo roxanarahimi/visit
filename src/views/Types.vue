@@ -74,6 +74,7 @@ export default {
       {title: 'آدامس'},
 
     ];
+
     return {
       data, route, router, query
     }
