@@ -60,8 +60,7 @@
       </div>
       <div class="d-flex justify-content-between">
         <p>جمع امتیاز چیدمان:</p>
-        <input id="exist" class=" rounded text-center py-1"
-               style="background-color: lightgray; width: 100px; height: 30px; border: none">
+        <input id="exist" class=" rounded text-center py-1" style="background-color: lightgray; width: 100px; height: 30px; border: none">
       </div>
 
     </div>
