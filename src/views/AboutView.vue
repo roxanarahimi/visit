@@ -109,17 +109,30 @@ export default {
             data.value.forEach((p)=>{
               ids.push(p.id)
             })
-            axios.post('https://api.amadehlaziz.com:446/form/products_by_ids?form_id='+localStorage.getItem('form_id')+'&api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',
-                { ids })
+            axios.post('https://api.amadehlaziz.com:446/form/products_by_ids?form_id='+localStorage.getItem('form_id')+'&api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', { ids })
                 .then((response)=>{
-                  data.value.forEach((d)=>{
-                    response.data.forEach((r)=>{
-                      if(d.id == r.product_id){
-                        d.shelf = r.shelf;
-                        d.FT = r.FT;
-                      }
+                  if(response.data.length > 0){
+                    data.value.forEach((d)=>{
+                      response.data.forEach((r)=>{
+                        if(d.id == r.product_id){
+                          d.shelf = r.shelf;
+                          d.FT = r.FT;
+                        }
+                      })
                     })
-                  })
+                  }else{
+                    axios.get('https://api.amadehlaziz.com:446/form/last_shop_data/'+query.value.shop_id+'?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p')
+                    .then((res)=>{
+                      data.value.forEach((dd)=>{
+                        res.data.forEach((rr)=>{
+                          if(dd.id == rr.product_id){
+                            dd.shelf = rr.shelf;
+                            dd.FT = rr.FT;
+                          }
+                        })
+                      })
+                    }).catch((error)=>{console.log(error)})
+                  }
                 })
                 .catch((error)=>{console.log(error)})
           })
