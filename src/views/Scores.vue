@@ -126,7 +126,7 @@ export default {
         info[item.name] = item.checked
       })
       info.form_id = localStorage.getItem('form_id')
-      axios.post('http://api.amadehlaziz.com:8877/form/calculate_point?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', info)
+      axios.post('https://api.amadehlaziz.com:8877/form/calculate_point?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', info)
           .then((response) => {
             document.querySelector('#exist').value = response.data.total_layout;
             document.querySelector('#notExist').value = response.data.total_absence;
@@ -174,7 +174,7 @@ export default {
           "chewing_gum_50": points.chewing_gum_50_2
         }
       }
-      axios.post('http://api.amadehlaziz.com:8877/form/add_points_to_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', y)
+      axios.post('https://api.amadehlaziz.com:8877/form/add_points_to_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', y)
           .then((response) => {
             alert('ثبت نهایی فرم با موفقیت انجام شد')
             router.go(-3);

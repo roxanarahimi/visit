@@ -152,14 +152,14 @@ export default {
     const api_key= 'w2fqxjKzdlx345NjQ7D99xz5cPp';
     const getUsers = ()=>{
 
-      axios.get('http://api.amadehlaziz.com:8877/panel/users?api_key=w2fqxjKzdlx345NjQ7D99xz5cPp')
+      axios.get('https://api.amadehlaziz.com:8877/panel/users?api_key=w2fqxjKzdlx345NjQ7D99xz5cPp')
       .then((response)=>{
         users.value = response.data
       })
       .catch((error)=>{ console.log(error)});
     }
     const getShops = ()=>{
-      let url = 'http://api.amadehlaziz.com:8877/panel/filter_shops'
+      let url = 'https://api.amadehlaziz.com:8877/panel/filter_shops'
       axios.get(url+'?api_key='+api_key+'&grade='+grade.value+'&group='+group.value+'&city='+city.value)
           .then((response)=>{
             shops.value = response.data
@@ -205,7 +205,7 @@ export default {
       autoSubmit: false
     }
     const createForm = ()=>{
-      axios.post('http://api.amadehlaziz.com:8877/form/create_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',{
+      axios.post('https://api.amadehlaziz.com:8877/form/create_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',{
         shop_id: shop.value.id,
         visitor_id: user.value.id,
         visit_date: date.value,
