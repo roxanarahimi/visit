@@ -91,7 +91,7 @@ export default {
   setup(){
     const data = ref([]);
     const getProducts = ()=>{
-      axios.get('https://api.amadehlaziz.com:8877/panel/products?api_key=w2fqxjKzdlx345NjQ7D99xz5cPp')
+      axios.get('https://api.amadehlaziz.com:446/panel/products?api_key=w2fqxjKzdlx345NjQ7D99xz5cPp')
           .then((response)=>{
             data.value = response.data;
             data.value.forEach((item)=>{
@@ -109,7 +109,7 @@ export default {
             data.value.forEach((p)=>{
               ids.push(p.id)
             })
-            axios.post('https://api.amadehlaziz.com:8877/form/products_by_ids?form_id='+localStorage.getItem('form_id')+'&api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', { ids })
+            axios.post('https://api.amadehlaziz.com:446/form/products_by_ids?form_id='+localStorage.getItem('form_id')+'&api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', { ids })
                 .then((response)=>{
                   if(response.data.length > 0){
                     data.value.forEach((d)=>{
@@ -121,7 +121,7 @@ export default {
                       })
                     })
                   }else{
-                    axios.get('https://api.amadehlaziz.com:8877/form/last_shop_data/'+query.value.shop_id+'?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p')
+                    axios.get('https://api.amadehlaziz.com:446/form/last_shop_data/'+query.value.shop_id+'?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p')
                     .then((res)=>{
                       data.value.forEach((dd)=>{
                         res.data.forEach((rr)=>{
@@ -187,7 +187,7 @@ export default {
         info.push({ product_id: item.id, shelf: item.shelf, FT: item.FT })
       })
 
-      axios.post('https://api.amadehlaziz.com:8877/form/add_products_to_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',{
+      axios.post('https://api.amadehlaziz.com:446/form/add_products_to_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',{
         "form_id": localStorage.getItem('form_id'),
         "product_info": info
       })
