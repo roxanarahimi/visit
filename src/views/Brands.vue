@@ -29,9 +29,11 @@
             date: query.date,
             time: query.time ,
             type: query.type,
-            brand: item}}" v-for="item in data" class="col-6">
+            brand: item.title,
+            own: item.own_brand,
+            }}" v-for="item in data" class="col-6">
       <div class="box mb-3">
-        <p class="mx-auto mb-0" style="align-self: center">{{ item }}</p>
+        <p class="mx-auto mb-0" style="align-self: center">{{ item.title}}</p>
       </div>
     </router-link>
 <!--    <div class="d-flex justify-content-center pt-5">-->
@@ -62,28 +64,33 @@ export default {
     const data = ref([])
 
     let brands = [
-      {type: 'سوپ', brands: ['الیت', 'آماده لذیذ', 'نودیلند', 'مهنام', 'هاتی کارا','زر','سبزان','برتر',]},
-      {type: 'نودل', brands: ['الیت', 'آماده لذیذ', 'نودیلند','مهنام','هاتی کارا','گلین', 'شف هو','هفده',]},
-      {type: 'عصاره', brands: ['الیت', 'آماده لذیذ', 'نودیلند','مهنام','هاتی کارا','زر','ایپک',]},
+      {type: 'سوپ', brands: [{title:'الیت', own_brand: true}, {title:'آماده لذیذ', own_brand: true}, {title:'نودیلند', own_brand: true},
+          {title:'مهنام', own_brand: false}, {title:'هاتی کارا', own_brand: false}, {title:'زر', own_brand: false}, {title:'سبزان', own_brand: false}, {title:'برتر', own_brand: false}]},
+      {type: 'نودل', brands: [{title:'الیت', own_brand: true}, {title:'آماده لذیذ', own_brand: true}, {title:'نودیلند', own_brand: true},
+          {title:'مهنام', own_brand: false}, {title:'هاتی کارا', own_brand: false},{title:'گلین', own_brand: false},{title:'شف هو', own_brand: false},{title:'هفده', own_brand: false}]},
+      {type: 'عصاره', brands: [{title:'الیت', own_brand: true}, {title:'آماده لذیذ', own_brand: true}, {title:'نودیلند', own_brand: true},
+          {title:'مهنام', own_brand: false}, {title:'هاتی کارا', own_brand: false},{title:'زر', own_brand: false},{title:'ایپک', own_brand: false}]},
 
-      {type: 'آش', brands: ['الیت']},
-      {type: 'قهوه', brands: ['کوپا',]},
-      {type: 'ادویه', brands: ['الیت']},
-      {type: 'پاستا', brands: ['الیت',]},
-      {type: 'پیاز داغ', brands: ['الیت',]},
-      {type: 'پرک', brands: ['الیت',]},
-      {type: 'ژله', brands: ['کوپا',]},
-      {type: 'پودینگ', brands: ['کوپا', 'فیت و فان',]},
-      {type: 'غلات صبحانه', brands: ['کوپا',]},
-      {type: 'شکلات صبحانه', brands: ['کوپا',]},
+      {type: 'آش', brands: [{title:'الیت', own_brand: true}]},
+      {type: 'قهوه', brands: [{title:'کوپا', own_brand: true}]},
+      {type: 'ادویه', brands: [{title:'الیت', own_brand: true}]},
+      {type: 'پاستا', brands: [{title:'الیت', own_brand: true},]},
+      {type: 'پیاز داغ', brands: [{title:'الیت', own_brand: true},]},
+      {type: 'پرک', brands: [{title:'الیت', own_brand: true},]},
+      {type: 'ژله', brands: [{title:'کوپا', own_brand: true},]},
+      {type: 'پودینگ', brands: [{title:'کوپا', own_brand: true},{title:'فیت و فان', own_brand: true}]},
+      {type: 'غلات صبحانه', brands: [{title:'کوپا', own_brand: true},]},
+      {type: 'شکلات صبحانه', brands: [{title:'کوپا', own_brand: true},]},
 
-      {type: 'ویفر', brands: ['کانتی','کوپا','تامبی','زر','چیچک','باراکا','بایکیت','شونیز','کلاب']},
-      {type: 'بیسکوئیت', brands: ['کوپا','او کوپا',  'ستاک', 'جمانه', 'درنا', 'گرجی', 'فرخنده', 'سلامت',]},
+      {type: 'ویفر', brands: [{title:'کانتی', own_brand: true},{title:'کوپا', own_brand: true},{title:'تامبی', own_brand: true},{title:'کلاب', own_brand: true},
+          {title:'زر', own_brand: false},{title:'چیچک', own_brand: false},{title:'باراکا', own_brand: false},{title:'بایکیت', own_brand: false},{title:'شونیز', own_brand: false},]},
+      {type: 'بیسکوئیت', brands: [{title:'کوپا', own_brand: true},{title:'او کوپا', own_brand: true},
+          {title:'ستاک', own_brand: false},{title:'جمانه', own_brand: false},{title:'درنا', own_brand: false},{title:'گرجی', own_brand: false},{title:'فرخنده', own_brand: false},{title:'سلامت', own_brand: false},]},
 
-      {type: 'بیسکوئیت پذیرایی', brands: ['کوپا','کوپا جو','کوپا گندم',]},
-      {type: 'ژله', brands: ['کوپا',]},
-      {type: 'دراژه', brands: ['کوپا',]},
-      {type: 'آدامس', brands: ['اکس فست']},
+      {type: 'بیسکوئیت پذیرایی', brands: [{title:'کوپا', own_brand: true},{title:'کوپا جو', own_brand: true},{title:'کوپا گندم', own_brand: true}]},
+      {type: 'ژله', brands: [{title:'کوپا', own_brand: true}]},
+      {type: 'دراژه', brands: [{title:'کوپا', own_brand: true}]},
+      {type: 'آدامس', brands: [{title:'اکس فست', own_brand: true}]},
     ]
     onMounted(async ()=>{
 

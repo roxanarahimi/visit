@@ -95,8 +95,14 @@ export default {
           .then((response)=>{
             data.value = response.data;
             data.value.forEach((item)=>{
-              item.shelf = 1;
-              item.FT = 0;
+              if (query.value.own == 'false'){
+                item.shelf = 0;
+                item.FT = 0;
+              }else{
+                item.shelf = 1;
+                item.FT = 0;
+              }
+
             });
           })
           .then(()=>{
@@ -115,8 +121,13 @@ export default {
                     data.value.forEach((d)=>{
                       response.data.forEach((r)=>{
                         if(d.id == r.product_id){
-                          d.shelf = r.shelf;
-                          d.FT = r.FT;
+                          if (query.value.own == 'false'){
+                            d.shelf = 0;
+                            d.FT = 0;
+                          }else{
+                            d.shelf = r.shelf;
+                            d.FT = r.FT;
+                          }
                         }
                       })
                     })
@@ -126,8 +137,14 @@ export default {
                       data.value.forEach((dd)=>{
                         res.data.forEach((rr)=>{
                           if(dd.id == rr.product_id){
-                            dd.shelf = rr.shelf;
-                            dd.FT = rr.FT;
+                            if (query.value.own == 'false'){
+                              d.shelf = 0;
+                              d.FT = 0;
+                            }else{
+                              dd.shelf = rr.shelf;
+                              dd.FT = rr.FT;
+                            }
+
                           }
                         })
                       })
@@ -176,6 +193,7 @@ export default {
       let promise = new Promise( async (resolve, reject) => {
         await router.isReady();
         query.value = route.query;
+        
         if (route.query) {resolve('Success');} else {   reject('Error');}
       })
       promise.then(() => { getProducts(); }).catch((err) => { console.error(err);});
