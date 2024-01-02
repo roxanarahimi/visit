@@ -210,12 +210,21 @@ export default {
         "product_info": info
       })
       .then((response)=>{
-        getProducts();
+        if (response.status === 200){
+          getProducts();
+          // localStorage.removeItem('brands')
+          let brand = JSON.parse(localStorage.getItem('brands')) || [];
+          brand.push({typeId: query.value.typeId,brandId: query.value.brandId})
+          localStorage.setItem('brands',JSON.stringify(brand))
+        }
+
+      }).then(()=>{
+        // document.querySelector('#back_btn').click();
+        window.location = '/brands?shop_id='+query.value.shop_id+'&shop_name='+query.value.shop_name+'&grade='+query.value.grade+'&user_id='+query.value.user_id+'&user_name='+query.value.user_name+'&date='+query.value.date+'&time='+query.value.time+'&type='+query.value.type;
 
       }).catch((error)=>{ console.error(error)})
 
-      document.querySelector('#back_btn').click();
-    }
+     }
     return{
       data, increaseFT, decreaseFT, increaseShelf, decreaseShelf, route, router, query,getProducts,submit
     }
