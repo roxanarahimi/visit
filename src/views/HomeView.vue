@@ -3,20 +3,20 @@
   <div class="align-self-center row justify-content-center" style="min-height: 250px">
     <h5 class="my-5 pw-bold text-center">اطلاعات را وارد نمایید:</h5>
     <form class="h-100 col-8 ">
-      <div>
-        <date-picker
-            @change = "check" v-model="date"
-                     :format="options.format"
-                     :displayFormat="options.displayFormat"
-                     :editable="options.editable"
-                     :placeholder="options.placeholder"
-                     :altFormat="options.altFormat"
-                     :color="options.color"
-                     :autoSubmit="options.autoSubmit"></date-picker>
-      </div>
-      <div class="position-relative">
-        <input id="time" type="time" v-model="time" placeholder="ساعت:"  @change = "check" class="form-control border-0 border-bottom bg-transparent rounded-0 border-dark">
-      </div>
+<!--      <div>-->
+<!--        <date-picker-->
+<!--            @change = "check" v-model="date"-->
+<!--                     :format="options.format"-->
+<!--                     :displayFormat="options.displayFormat"-->
+<!--                     :editable="options.editable"-->
+<!--                     :placeholder="options.placeholder"-->
+<!--                     :altFormat="options.altFormat"-->
+<!--                     :color="options.color"-->
+<!--                     :autoSubmit="options.autoSubmit"></date-picker>-->
+<!--      </div>-->
+<!--      <div class="position-relative">-->
+<!--        <input id="time" type="time" v-model="time" placeholder="ساعت:"  @change = "check" class="form-control border-0 border-bottom bg-transparent rounded-0 border-dark">-->
+<!--      </div>-->
       <div>
         <select v-model="grade"  id="shop_grade" @change = "check" class="form-select border-0 border-bottom bg-transparent rounded-0 border-dark">
           <option value="">گرید فروشگاه:</option>
@@ -71,7 +71,6 @@
 <script>
 import {onMounted, ref} from "vue";
 import Multiselect from '@vueform/multiselect'
-
 import DatePicker from 'vue3-persian-datetime-picker'
 
 export default {
@@ -191,6 +190,9 @@ export default {
     }
     onMounted(()=>{
       getUsers();
+      var x = new Date();
+      date.value = x.toJSON().slice(0,10).replace(/-/g,'-');
+      time.value = x.getHours()+':'+x.getMinutes()+':'+ x.getSeconds();
     })
 
     const date = ref('');
