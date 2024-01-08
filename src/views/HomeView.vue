@@ -193,6 +193,8 @@ export default {
       var x = new Date();
       date.value = x.toJSON().slice(0,10).replace(/-/g,'-');
       time.value = x.getHours()+':'+x.getMinutes()+':'+ x.getSeconds();
+
+
     })
 
     const date = ref('');
