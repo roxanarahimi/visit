@@ -69,7 +69,7 @@
     <div class="d-flex justify-content-center pt-5">
       <button @click="submit" style="width: 200px; text-align: center" class=" py-2 btn-btn mx-auto px-5">ثبت تغییرات</button>
     </div>
-    <div class="d-flex justify-content-center pt-5" v-if="showScoresBtn">
+    <div class="d-flex justify-content-center pt-5" >
       <router-link style="width: 200px; text-align: center" :to="{ name:'scores', query:query}" class=" py-2 btn-btn mx-auto px-5">جمع امتیاز</router-link>
     </div>
   </div>
