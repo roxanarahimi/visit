@@ -69,9 +69,7 @@
     <div class="d-flex justify-content-center pt-5">
       <button @click="submit" style="width: 200px; text-align: center" class=" py-2 btn-btn mx-auto px-5">ثبت تغییرات</button>
     </div>
-    <div class="d-flex justify-content-center pt-5" >
-      <router-link style="width: 200px; text-align: center" :to="{ name:'scores', query:query}" class=" py-2 btn-btn mx-auto px-5">جمع امتیاز</router-link>
-    </div>
+
   </div>
   <div v-else class=" d-flex justify-content-center">
     <div class="spinner-grow text-dark" role="status">
@@ -198,8 +196,6 @@ export default {
       })
       promise.then(() => { getProducts(); }).catch((err) => { console.error(err);});
 
-
-      showScoresBtn.value = JSON.parse(localStorage.getItem('brands')).length == 56;
     })
     const submit = ()=>{
       let info = [];

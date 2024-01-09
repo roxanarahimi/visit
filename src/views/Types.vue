@@ -24,8 +24,8 @@
             user_name: query.user_name,
             date: query.date,
             time: query.time ,
-            type: item.title}}" v-for="item in data" class="col-6">
-      <div class="box mb-3">
+            type: item.title}}" v-for="item in data" class="col-6"  >
+      <div class="box mb-3"  :class="{'done': item.done == true}">
         <p class="mx-auto mb-0" style="align-self: center">{{ item.title }}</p>
       </div>
     </router-link>
@@ -33,7 +33,9 @@
     <!--      <router-link :to="{ name:'scores', query:{grade: query.grade,  name:query.name , user:query.user}}" class=" py-2 btn-btn mx-auto px-5">جمع امتیاز</router-link>-->
     <!--    </div>-->
   </div>
-
+  <div class="d-flex justify-content-center pt-5" >
+    <router-link style="width: 200px; text-align: center" :to="{ name:'scores', query:query}" class=" py-2 btn-btn mx-auto px-5">جمع امتیاز</router-link>
+  </div>
 
 </template>
 
@@ -49,31 +51,40 @@ export default {
     const route = useRoute()
     const router = useRouter()
     const query = ref({})
+    const data = [
+      {id: 1,title: 'سوپ', count: 8},
+      {id: 2,title: 'نودل', count: 8},
+      {id: 3,title: 'عصاره', count: 7},
+      {id: 4,title: 'آش', count: 1},
+      {id: 5,title: 'قهوه', count: 1},
+      {id: 6,title: 'ادویه', count: 1},
+      {id: 7,title: 'پاستا', count: 1},
+      {id: 8,title: 'پیاز داغ', count: 1},
+      {id: 9,title: 'پرک', count: 1},
+      {id: 10,title: 'ژله', count: 1},
+      {id: 11,title: 'پودینگ', count: 2},
+      {id: 12,title: 'غلات صبحانه', count: 1},
+      {id: 13,title: 'شکلات صبحانه', count: 1},
+      {id: 14,title: 'ویفر', count: 9},
+      {id: 15,title: 'بیسکوئیت', count: 8},
+      {id: 16,title: 'بیسکوئیت پذیرایی', count: 3},
+      {id: 17,title: 'دراژه', count: 1},
+      {id: 18,title: 'آدامس', count: 1},
+
+    ];
     onMounted(async () => {
       await router.isReady();
       query.value = route.query;
+      let brands = JSON.parse(localStorage.getItem('brands'));
+      data.forEach((element)=>{
+        let x = brands?.filter((b)=>{return parseInt(b.typeId) == element.id });
+        if (x && x.length == element.count){
+          element.done = true
+        }else{
+          element.done = false
+        }
+      });
     });
-    const data = [
-      {id: 1,title: 'سوپ'},
-      {id: 2,title: 'نودل'},
-      {id: 3,title: 'عصاره'},
-      {id: 4,title: 'آش'},
-      {id: 5,title: 'قهوه'},
-      {id: 6,title: 'ادویه'},
-      {id: 7,title: 'پاستا'},
-      {id: 8,title: 'پیاز داغ'},
-      {id: 9,title: 'ژله'},
-      {id: 10,title: 'پودینگ'},
-      {id: 11,title: 'غلات صبحانه'},
-      {id: 12,title: 'شکلات صبحانه'},
-      {id: 13,title: 'پرک'},
-      {id: 14,title: 'ویفر'},
-      {id: 15,title: 'بیسکوئیت پذیرایی'},
-      {id: 16,title: 'بیسکوئیت'},
-      {id: 17,title: 'دراژه'},
-      {id: 18,title: 'آدامس'},
-
-    ];
 
     return {
       data, route, router, query
@@ -82,3 +93,8 @@ export default {
 
 }
 </script>
+<style>
+.done{
+  background-color: lightgreen !important;
+}
+</style>
