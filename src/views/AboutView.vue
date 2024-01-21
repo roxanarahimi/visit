@@ -97,7 +97,8 @@ export default {
                 item.shelf = 0;
                 item.FT = 0;
               }else{
-                item.shelf = 1;
+                // item.shelf = 1;
+                item.shelf = 0;
                 item.FT = 0;
               }
 
