@@ -31,12 +31,21 @@
       <tbody>
       <tr v-for="(item, index) in data" :key="index">
         <th scope="row" style="width: 40px">
-          <div @click="checkboxToggle(index)" class="check d-flex justify-content-center">
+          <div v-if="item.disable == true" class="check d-flex justify-content-center bg-gray" >
             <svg v-if="item.checked" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                  class=" bi bi-check2" viewBox="0 0 14 14">
               <path
                   d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
             </svg>
+
+          </div>
+          <div v-else @click="checkboxToggle(index)" class="check d-flex justify-content-center">
+            <svg v-if="item.checked" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class=" bi bi-check2" viewBox="0 0 14 14">
+              <path
+                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+            </svg>
+
           </div>
         </th>
         <td>{{ item.title }}</td>
@@ -94,27 +103,27 @@ export default {
     const total_absence = ref(0)
     const total_points = ref(0)
     const data = ref([
-      {name: 'noodelite_60_10', title: 'نودالیت نودالیت', space: 60, score: 10, checked: false},
-      {name: 'noodle_amadeh_noodiland_20_5', title: 'نودالیت آماده و نودیلند', space: 30, score: 5, checked: false},
-      {name: 'extract_elite_80_10', title: 'عصاره الیت', space: 80, score: 10, checked: false},
-      {name: 'extract_amadeh_noodiland_10_5', title: 'عصاره آماده و نودیلند', space: 10, score: 5, checked: false},
-      {name: 'soup_elite_50_10', title: 'سوپ الیت', space: 50, score: 10, checked: false},
-      {name: 'soup_amadeh_noodiland_20_5', title: 'سوپ آماده و نودیلند', space: 20, score: 5, checked: false},
-      {name: 'spice_25_3', title: 'ادویه', space: 25, score: 3, checked: false},
-      {name: 'chocolate_wafer_kanti_30_10', title: 'ویفر شکلاتی و کانتی', space: 30, score: 10, checked: false},
-      {name: 'tombi_15_3', title: 'تامبی', space: 15, score: 3, checked: false},
-      {name: 'select_15_2', title: 'سلکت', space: 15, score: 2, checked: false},
-      {name: 'breakfast_chocolate_30_10', title: 'شکلات صبحانه', space: 30, score: 10, checked: false},
-      {name: 'glass_box_coffee_40_7', title: 'قهوه های کیسه ای باکسی و شیشه ای', space: 40, score: 7, checked: false},
-      {name: 'biscuit_ocopa_30_3', title: 'بیسکوییت اوکوپا', space: 30, score: 3, checked: false},
-      {name: 'creamy_bran_biscuit_15_2', title: 'بیسکوییت های سبوس ساده و کرمدار', space: 15, score: 2, checked: false},
-      {name: 'rectangular_biscuit_piece_chocolate_5_1', title: 'بیسکوییت مستطیلی و تکه شکلات', space: 5, score: 1, checked: false},
-      {name: 'copa_fit_and_fun_pudding_95_2', title: 'پودینگ کوپا و فیت و فان', space: 95, score: 2, checked: false},
-      {name: 'jelly_30_3', title: 'ژله', space: 30, score: 3, checked: false},
-      {name: 'breakfast_cereal_30_3', title: 'غلات صبحانه', space: 30, score: 3, checked: false},
-      {name: 'copa_barley_and_wheat_50_2', title: 'کوپا جو کوپا گندم (از کل فضا)', space: 50, score: 2, checked: false},
-      {name: 'multigrain_50_2', title: 'چند غله (از کل فضا)', space: 50, score: 2, checked: false},
-      {name: 'chewing_gum_50_2', title: 'آدامس (از کل فضا)', space: 50, score: 2, checked: false},
+      {name: 'noodelite_60_10', title: 'نودالیت نودالیت', space: 60, score: 10, checked: false, disable:true},
+      {name: 'noodle_amadeh_noodiland_20_5', title: 'نودالیت آماده و نودیلند', space: 30, score: 5, checked: false, disable:true},
+      {name: 'extract_elite_80_10', title: 'عصاره الیت', space: 80, score: 10, checked: false, disable:true},
+      {name: 'extract_amadeh_noodiland_10_5', title: 'عصاره آماده و نودیلند', space: 10, score: 5, checked: false, disable:true},
+      {name: 'soup_elite_50_10', title: 'سوپ الیت', space: 50, score: 10, checked: false, disable:true},
+      {name: 'soup_amadeh_noodiland_20_5', title: 'سوپ آماده و نودیلند', space: 20, score: 5, checked: false, disable:true},
+      {name: 'spice_25_3', title: 'ادویه', space: 25, score: 3, checked: false, disable:false},
+      {name: 'chocolate_wafer_kanti_30_10', title: 'ویفر شکلاتی و کانتی', space: 30, score: 10, checked: false, disable:false},
+      {name: 'tombi_15_3', title: 'تامبی', space: 15, score: 3, checked: false, disable:false},
+      {name: 'select_15_2', title: 'سلکت', space: 15, score: 2, checked: false, disable:false},
+      {name: 'breakfast_chocolate_30_10', title: 'شکلات صبحانه', space: 30, score: 10, checked: false, disable:false},
+      {name: 'glass_box_coffee_40_7', title: 'قهوه های کیسه ای باکسی و شیشه ای', space: 40, score: 7, checked: false, disable:false},
+      {name: 'biscuit_ocopa_30_3', title: 'بیسکوییت اوکوپا', space: 30, score: 3, checked: false, disable:false},
+      {name: 'creamy_bran_biscuit_15_2', title: 'بیسکوییت های سبوس ساده و کرمدار', space: 15, score: 2, checked: false, disable:false},
+      {name: 'rectangular_biscuit_piece_chocolate_5_1', title: 'بیسکوییت مستطیلی و تکه شکلات', space: 5, score: 1, checked: false, disable:false},
+      {name: 'copa_fit_and_fun_pudding_95_2', title: 'پودینگ کوپا و فیت و فان', space: 95, score: 2, checked: false, disable:false},
+      {name: 'jelly_30_3', title: 'ژله', space: 30, score: 3, checked: false, disable:false},
+      {name: 'breakfast_cereal_30_3', title: 'غلات صبحانه', space: 30, score: 3, checked: false, disable:false},
+      {name: 'copa_barley_and_wheat_50_2', title: 'کوپا جو کوپا گندم (از کل فضا)', space: 50, score: 2, checked: false, disable:false},
+      {name: 'multigrain_50_2', title: 'چند غله (از کل فضا)', space: 50, score: 2, checked: false, disable:false},
+      {name: 'chewing_gum_50_2', title: 'آدامس (از کل فضا)', space: 50, score: 2, checked: false, disable:false},
     ]);
 
     const checkboxToggle = (index) => {
@@ -134,6 +143,12 @@ export default {
             total_absence.value = response.data.total_absence;
             total_points.value = response.data.total_layout;
 
+            data.value.noodelite_60_10.checked = response.data.salty_basket_points.elite_noodle;
+            data.value.noodle_amadeh_noodiland_20_5.checked = response.data.salty_basket_points.amdadeh_noodle;
+            data.value.extract_elite_80_10.checked = response.data.salty_basket_points.elite_extract;
+            data.value.extract_amadeh_noodiland_10_5.checked = response.data.salty_basket_points.amdadeh_extract;
+            data.value.soup_elite_50_10.checked = response.data.salty_basket_points.elite_soup;
+            data.value.soup_amadeh_noodiland_20_5.checked = response.data.salty_basket_points.amadeh_soup;
           })
           .catch((error) => {
             console.log(error)
@@ -221,5 +236,8 @@ th {
 th, td {
   font-size: 13px;
   font-weight: lighter !important;
+}
+.bg-gray{
+  background-color: lightgray;
 }
 </style>
