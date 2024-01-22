@@ -103,8 +103,8 @@ export default {
     const total_absence = ref(0)
     const total_points = ref(0)
     const data = ref([
-      {name: 'noodelite_60_10', title: 'نودالیت نودالیت', space: 60, score: 10, checked: false, disable:true},
-      {name: 'noodle_amadeh_noodiland_20_5', title: 'نودالیت آماده و نودیلند', space: 30, score: 5, checked: false, disable:true},
+      {name: 'noodelite_60_10', title: 'نودالیت الیت', space: 60, score: 10, checked: false, disable:true},
+      {name: 'noodle_amadeh_noodiland_20_5', title: 'نودالیت آماده لذیذ و نودیلند', space: 30, score: 5, checked: false, disable:true},
       {name: 'extract_elite_80_10', title: 'عصاره الیت', space: 80, score: 10, checked: false, disable:true},
       {name: 'extract_amadeh_noodiland_10_5', title: 'عصاره آماده و نودیلند', space: 10, score: 5, checked: false, disable:true},
       {name: 'soup_elite_50_10', title: 'سوپ الیت', space: 50, score: 10, checked: false, disable:true},

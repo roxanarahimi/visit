@@ -33,14 +33,13 @@
       <div class="row justify-content-center mb-3 ">
         <button class="btn btn-btn3 col-1 p-2" :id="'btn_plus_Shelf_'+index" @click="increaseShelf(index)">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 2a.
-            5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
           </svg>
         </button>
-        <div class="col-6 input-container">
+        <div class="col-4 input-container">
           <input type="number" class="input" placeholder="عدد را وارد کنید" :value="item.shelf" :id="'input_Shelf_'+index">
         </div>
-        <div class="col-3 title-container ">Shelf</div>
+        <div class="col-5 title-container ">شلف</div>
         <button class="btn btn-btn3 col-1 p-2" :id="'btn_minus_Shelf_'+index" @click="decreaseShelf(index)">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
@@ -54,10 +53,10 @@
             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
           </svg>
         </button>
-        <div class="col-6 input-container">
+        <div class="col-4 input-container">
           <input type="number" class="input" placeholder="عدد را وارد کنید" :value="item.FT" :id="'input_FT_'+index">
         </div>
-        <div class="col-3 title-container ">F/T</div>
+        <div class="col-5 title-container ">فضای تبلیغاتی</div>
         <button class="btn btn-btn3 col-1 p-2" :id="'btn_minus_FT_'+index" @click="decreaseFT(index)">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
