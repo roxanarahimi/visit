@@ -1,70 +1,48 @@
 <template>
-<div class="d-grid vh-100">
-  <div class="align-self-center row justify-content-center" style="min-height: 250px">
-    <h5 class="my-5 pw-bold text-center">اطلاعات را وارد نمایید:</h5>
-    <form class="h-100 col-8 ">
-<!--      <div>-->
-<!--        <date-picker-->
-<!--            @change = "check" v-model="date"-->
-<!--                     :format="options.format"-->
-<!--                     :displayFormat="options.displayFormat"-->
-<!--                     :editable="options.editable"-->
-<!--                     :placeholder="options.placeholder"-->
-<!--                     :altFormat="options.altFormat"-->
-<!--                     :color="options.color"-->
-<!--                     :autoSubmit="options.autoSubmit"></date-picker>-->
-<!--      </div>-->
-<!--      <div class="position-relative">-->
-<!--        <input id="time" type="time" v-model="time" placeholder="ساعت:"  @change = "check" class="form-control border-0 border-bottom bg-transparent rounded-0 border-dark">-->
-<!--      </div>-->
-      <div>
-        <select v-model="grade"  id="shop_grade" @change = "check" class="form-select border-0 border-bottom bg-transparent rounded-0 border-dark">
-          <option value="">گرید فروشگاه:</option>
-          <option v-for="gd in grades" :key="gd" :value="gd">{{ gd }}</option>
-        </select>
-      </div>
+  <div class="d-grid vh-100">
+    <div class="align-self-center row justify-content-center" style="min-height: 250px">
+      <form class="h-100 col-8 login_form" >
+        <h5 class="my-5 pw-bold text-center">ورود کاربر:</h5>
 
+        <div class="">
+          <input id="username" type="text"  placeholder="نام کاربر:"
+                 class="form-control border-0 border-bottom bg-transparent rounded-0 border-dark">
+        </div>
+        <div class="">
+          <input id="password" type="password"  placeholder="کلمه عبور:"
+                 class="form-control border-0 border-bottom bg-transparent rounded-0 border-dark">
+        </div>
+
+
+
+        <div class="d-flex justify-content-center pt-5">
+          <button v-if="!all" class="btn-btn mx-auto px-5" @click.prevent=submit>ثبت</button>
+        </div>
+      </form>
       <div>
-        <select  v-model="group" id="shop_group" @change = "check" class="form-select border-0 border-bottom bg-transparent rounded-0 border-dark">
-          <option value="">گروه فروشگاه:</option>
-          <option v-for="g in groups" :key="g" :value="g">{{ g }}</option>
-        </select>
-      </div>
-      <div>
-        <select v-model="city"  id="city" @change = "check" class="form-select border-0 border-bottom bg-transparent rounded-0 border-dark">
-          <option value="">شهر:</option>
-          <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
-        </select>
-      </div>
-      <div>
-<!--        <select  v-model="name" id="shop_name" @change = "check" class="form-select border-0 border-bottom bg-transparent rounded-0 border-dark">-->
-<!--          <option value="" selected>نام فروشگاه:</option>-->
-<!--          <option  v-for="item in shops" :value="item.name">{{ item.name}}</option>-->
-<!--        </select>-->
-        <Multiselect
-            v-model="shop" @change="check2"
-                      placeholder="فروشگاه:"
-                      dir="rtl"
-            :mode="'single'"
-            :options="shops"
-            :searchable="true"
-            :create-option="true"
-        />
+        <div class="shop d-none">
+          <h5 class="my-5 pw-bold text-center">انتخاب فروشگاه:</h5>
+
+          <Multiselect
+              v-model="shop" @change="check2"
+              placeholder="فروشگاه:"
+              dir="rtl"
+              :mode="'single'"
+              :placeholder="'انتخاب کنید'"
+              :options="shops"
+              :searchable="true"
+              :create-option="true"
+          />
+          <div class="d-flex justify-content-center pt-5">
+            <router-link  :to="{ name: 'types', query : info}" @click="createForm"
+                          class="btn-btn mx-auto px-5 py-2">ثبت
+            </router-link>
+          </div>
+        </div>
 
       </div>
-      <div>
-        <select  v-model="user"  id="name" @change = "check" class="form-select border-0 border-bottom bg-transparent rounded-0 border-dark">
-          <option value="">نام کارشناس:</option>
-          <option v-for="item in users" :value="{id:item.id, username:item.username}">{{ item.username }}</option>
-        </select>
-      </div>
-      <div class="d-flex justify-content-center pt-5">
-        <router-link v-if="all" :to="{ name: 'types', query : info}" @click="createForm"  class="btn-btn mx-auto px-5 py-2">ثبت</router-link>
-        <button  v-if="!all" class="btn-btn mx-auto px-5" @click.prevent =submit>ثبت</button>
-      </div>
-    </form>
+    </div>
   </div>
-</div>
 
 </template>
 
@@ -78,7 +56,7 @@ export default {
   components: {
     Multiselect, DatePicker
   },
-  setup(){
+  setup() {
     const users = ref();
     const shops = ref();
     const all = ref(false);
@@ -86,12 +64,12 @@ export default {
     const grade = ref('');
     const group = ref('');
     const city = ref('');
-    const shop = ref('');
-    const user = ref('');
+    const shop = ref({});
+    const user = ref({});
     const info = ref({});
     const time = ref('');
     const cities = [
-        "تهران",
+      "تهران",
       "کرمانشاه",
       "آذربایجان شرقی",
       "قزوین",
@@ -148,51 +126,67 @@ export default {
       "N",
       "O",
     ]
-    const api_key= 'w2fqxjKzdlx345NjQ7D99xz5cPp';
-    const getUsers = ()=>{
+    const api_key = 'w2fqxjKzdlx345NjQ7D99xz5cPp';
+    const getUsers = () => {
 
       axios.get('https://api.amadehlaziz.com:446/panel/users?api_key=w2fqxjKzdlx345NjQ7D99xz5cPp')
-      .then((response)=>{
-        users.value = response.data
-      })
-      .catch((error)=>{ console.log(error)});
+          .then((response) => {
+            users.value = response.data
+          })
+          .catch((error) => {
+            console.log(error)
+          });
     }
-    const getShops = ()=>{
-      let url = 'https://api.amadehlaziz.com:446/panel/filter_shops'
-      axios.get(url+'?api_key='+api_key+'&grade='+grade.value+'&group='+group.value+'&city='+city.value)
-          .then((response)=>{
+    const getShops = () => {
+      let url = 'https://api.amadehlaziz.com:446/panel/new_filter_shops'
+      axios.get(url + '?api_key=' + api_key + '&user_id=' + localStorage.getItem('user_id'))
+          .then((response) => {
             shops.value = response.data
-            shops.value.forEach((element)=>{
-              element.value = {id: element.id, name: element.name};
+            shops.value.forEach((element) => {
+              element.value = {id: element.id, name: element.name, grade: element.grade};
               element.label = element.name;
             })
           })
-          .catch((error)=>{ console.log(error)});
+          .then(()=>{
+            shop.value = null;
+          })
+          .catch((error) => {
+            console.log(error)
+          });
     }
-    const check = ()=>{
+    const check = () => {
       getShops();
-      if (grade.value != '' && group.value != '' && city.value != '' && shop.value?.id && user.value != '' && date.value != '' && time.value != ''){
+      if (shop.value?.id && user.value != '') {
         all.value = true;
-           info.value = {
-            shop_id: shop.value.id,
-            shop_name: shop.value.name,
-            grade: grade.value,
-            user_id: user.value.id,
-            user_name: user.value.username,
-             date: date.value,
-             time: time.value
+        var x = new Date();
+        date.value = x.toJSON().slice(0, 10).replace(/-/g, '-');
+        time.value = x.getHours() + ':' + x.getMinutes() + ':' + x.getSeconds();
 
-          }
+
       }
     }
-    const submit = ()=>{
-      alert('لطفا همه موارد را انتخاب کنید')
+    const submit = () => {
+      axios.post('https://api.amadehlaziz.com:446/form/login?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p&username=' +document.querySelector('#username').value+'&password='+ document.querySelector('#password').value)
+          .then((response) => {
+            localStorage.setItem('user_id', response.data.user_id)
+            console.log(response.data)
+            user.value.id = response.data.user_id;
+            user.value.name = response.data.name;
+
+
+            document.querySelector('.login_form').classList.add('d-none')
+            document.querySelector('.shop').classList.remove('d-none')
+            getShops();
+          })
+          .catch((error) => {
+            console.log(error)
+          });
     }
-    onMounted(()=>{
+    onMounted(() => {
       getUsers();
       var x = new Date();
-      date.value = x.toJSON().slice(0,10).replace(/-/g,'-');
-      time.value = x.getHours()+':'+x.getMinutes()+':'+ x.getSeconds();
+      date.value = x.toJSON().slice(0, 10).replace(/-/g, '-');
+      time.value = x.getHours() + ':' + x.getMinutes() + ':' + x.getSeconds();
 
 
     })
@@ -208,25 +202,37 @@ export default {
       color: 'black',
       autoSubmit: false
     }
-    const createForm = ()=>{
-      axios.post('https://api.amadehlaziz.com:446/form/create_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p',{
+    const createForm = () => {
+      axios.post('https://api.amadehlaziz.com:446/form/create_form_data?api_key=mJF2qVIOq22K1LvNBp9gDiOcK8e2p', {
         shop_id: shop.value.id,
         visitor_id: user.value.id,
         visit_date: date.value,
         visit_time: time.value
       })
-          .then((response)=>{
+          .then((response) => {
             localStorage.removeItem('brands');
             localStorage.setItem('form_id', response.data.form_id)
           })
-          .catch((error)=>{ console.log(error)});
+          .catch((error) => {
+            console.log(error)
+          });
     }
-    const check2  = ()=>{
-      if (grade.value != '' && group.value != '' && city.value != '' && shop.value?.id && user.value != '' && date.value != '' && time.value != '') {
-        all.value = true;
-      }
+    const check2 = () => {
+      setTimeout(()=>{
+        info.value = {
+          shop_id: shop.value.id,
+          shop_name: shop.value.name,
+          grade: shop.value.grade,
+          user_id: user.value.id,
+          user_name: user.value.name,
+          date: date.value,
+          time: time.value
+        }
+        console.log(shop.value,info.value)
+      },500)
     }
-    return {date, options, api_key, city,info, time, cities, groups, grades,createForm,
+    return {
+      date, options, api_key, city, info, time, cities, groups, grades, createForm,
       users, shops, getUsers, getShops, submit, check, all, grade, group, shop, user, check2
     }
   }
@@ -235,35 +241,41 @@ export default {
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style>
-.multiselect-clear{
+.multiselect-clear {
   /*margin-left: auto !important;*/
 }
-.multiselect{
-  border:none !important;
+
+.multiselect {
+  border: none !important;
   border-bottom: 1px solid black !important;
   border-radius: 0 !important;
 }
-.multiselect-search{
+
+.multiselect-search {
   background: #F8F9FA !important;
 }
-.multiselect:focus, .multiselect-search:focus, .multiselect-wrapper:focus, select, input{
+
+.multiselect:focus, .multiselect-search:focus, .multiselect-wrapper:focus, select, input {
   outline-color: transparent !important;
   box-shadow: none !important;
 }
 
 .is-active {
-   /*border: none !important;*/
-   box-shadow: none !important;
- }
-.vpd-input-group label{
+  /*border: none !important;*/
+  box-shadow: none !important;
+}
+
+.vpd-input-group label {
   display: none !important;
 }
-.vpd-input-group input{
+
+.vpd-input-group input {
   background-color: transparent !important;
-  border:none !important;
+  border: none !important;
   border-bottom: 1px solid black !important;
   border-radius: 0 !important;
 }
+
 input[type='time']:after {
   color: #737373;
   content: attr(placeholder) !important;
